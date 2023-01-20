@@ -1,0 +1,78 @@
+{% extends 'base_floors.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="shortcut icon" href="{% static 'styles/medias/tabLogo.png' %}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'styles/post.css' %}">
+{% endblock %}
+{% block title %}
+<title>Post | Reserve</title>
+{% endblock %}
+
+{% block floors_dd %}
+<li class="navMenuItem"><a href="/reserve/reserved/" class="navMenuItemLink">Reserve Status</a></li>
+<li><a href="/reserve/office/first">First floor</a></li>
+<li><a href="/reserve/office/second">Second floor</a></li>
+<li><a href="/reserve/office/third">Third floor</a></li>
+{% endblock %}
+
+{% block settings_dd %}
+<li><a href="/reserve/settings/about/">About the APP</a></li>
+<li><a href="/reserve/settings/report/">Report the Bug</a></li>
+<li><a href="/reserve/members/profile">Preferences</a></li>
+{% endblock %}
+
+{% block post %}
+{% endblock %}
+
+{% block body %}
+<!-- Start of content -->
+<div class="postBase">
+    <div class="postContent">
+        <div class="postSearch">
+            <label for="postSearchInput">Search here: </label>
+            <input type="text" id="postSearchInput">
+            <div>
+                <button type="submit">Go</button>
+                <button class="postSearchRefresh">Refresh</button>
+            </div>
+        </div>
+        <div class="postShow">
+            <table>
+                <tbody>
+                    <tr class="postShowHead">
+                        <td>Reciever</td>
+                        <td>Where is the Paket</td>
+                    </tr>
+                    {% if posts %}
+                    {% for post in posts %}
+                    <tr class="postShowResult">
+                        <td class="result ">{{ post.staff }}</td>
+                        <td class="result">{{ post.where }} <a style="float: right;"
+                                href="/reserve/office/post_delete/{{ post.id }}">Delete</a> </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="postAdd">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label for="postAddInput">Add new one: </label>
+                <br>
+                {{ postForm }}
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'scripts/navbar.js' %}"></script>
+<script src="{% static 'scripts/postSearch.js' %}"></script>
+{% endblock %}

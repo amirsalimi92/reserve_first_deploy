@@ -1,0 +1,85 @@
+{% extends 'base_floors.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="shortcut icon" href="{% static 'styles/medias/tabLogo.png' %}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'styles/profileStyle.css' %}">
+{% endblock %}
+{% block title %}
+<title>Profile | Reserve</title>
+{% endblock %}
+
+{% block floors_dd %}
+<li class="navMenuItem"><a href="/reserve/reserved/" class="navMenuItemLink">Reserve Status</a></li>
+<li><a href="/reserve/office/first/">First floor</a></li>
+<li><a href="/reserve/office/second/">Second floor</a></li>
+<li><a href="/reserve/office/third/">Third floor</a></li>
+{% endblock %}
+
+{% block settings_dd %}
+<li><a href="/reserve/settings/about/">About the APP</a></li>
+<li><a href="/reserve/settings/report/">Report the Bug</a></li>
+{% endblock %}
+
+{% block post %}
+<a href="/reserve/settings/post/" class="navMenuItemLink">Post Status</a>
+{% endblock %}
+
+{% block body %}
+<!-- Start of content -->
+<div class="content">
+    <div class="profilePhoto">
+        <div class="profilePhotoImg"></div>
+    </div>
+    <div class="profileData">
+        <form action="" method="GET" class="profileDataForm">
+            <div class="profileFirstname">
+                <label for="profileFirstname">First name: </label>
+                <input type="text" id="profileFirstname" value="{{ profile.first_name }}" disabled>
+            </div>
+            <div class="profileFamilyname">
+                <label for="profileLastname">Last name: </label>
+                <input type="text" id="profileLastname" value="{{ profile.last_name }}" disabled>
+            </div>
+            <div class="profileEmail">
+                <label for="profileEmail">Email: </label>
+                <input type="email" id="profileEmail" value="{{ profile.email }}" disabled>
+            </div>
+            <div class="office">
+                <label for="profileOffice">Office: </label>
+                <input type="text" value="{{ profile.office }}" disabled>
+            </div>
+            <div class="department">
+                <label for="profileDepartment">Department: </label>
+                <input type="text" value="{{ profile.department }}" disabled>
+            </div>
+        </form>
+    </div>
+    <div class="profileName">{{ profile.first_name }}</div>
+    <div class="profileFamily">{{ profile.last_name }}</div>
+    <div class="profileButton">
+        <a href="/reserve/members/edit/{{ profile.id }}">Edit</a>
+    </div>
+</div>
+<!-- end of content -->
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+    inputs = document.querySelectorAll('input')
+    inputs.forEach(e => {
+        if (e.value == 'None') {
+            e.value = ''
+            e.setAttribute('placeholder', 'Fill in here')
+            e.style['border'] = '2px solid #ff0000'
+        }
+    });
+
+</script>
+
+<script src="{% static 'scripts/navbar.js' %}"></script>
+{% endblock %}

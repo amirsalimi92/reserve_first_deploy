@@ -1,0 +1,87 @@
+{% extends 'base_floors.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="shortcut icon" href="{% static 'styles/medias/tabLogo.png' %}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'styles/profileStyle.css' %}">
+{% endblock %}
+{% block title %}
+<title>Edit profile | Reserve</title>
+{% endblock %}
+
+{% block floors_dd %}
+<li class="navMenuItem"><a href="/reserve/reserved/" class="navMenuItemLink">Reserve Status</a></li>
+<li><a href="/reserve/office/first/">First floor</a></li>
+<li><a href="/reserve/office/second/">Second floor</a></li>
+<li><a href="/reserve/office/third/">Third floor</a></li>
+{% endblock %}
+
+{% block settings_dd %}
+<li><a href="/reserve/settings/about/">About the APP</a></li>
+<li><a href="/reserve/settings/report/">Report the Bug</a></li>
+{% endblock %}
+
+{% block post %}
+<a href="/reserve/settings/post/" class="navMenuItemLink">Post Status</a>
+{% endblock %}
+
+{% block body %}
+<!-- Start of content -->
+<div class="content">
+    <div class="profilePhoto">
+        <div class="profilePhotoImg"></div>
+    </div>
+    <div class="profileData">
+        <form action="" method="post" class="profileDataForm">
+            {% csrf_token %}
+            <div class="profileFirstname">
+                <label for="profileFirstname">First name: </label>
+                {{ profileForm.first_name }}
+            </div>
+            <div class="profileFamilyname">
+                <label for="profileLastname">Last name: </label>
+                {{ profileForm.last_name }}
+            </div>
+            <div class="profileEmail">
+                <label for="profileEmail">Email: </label>
+                {{ profileForm.email }}
+            </div>
+            <div class="office">
+                <label for="profileOffice">Office: </label>
+                {{ profileForm.office }}
+            </div>
+            <div class="department">
+                <label for="profileDepartment">Department: </label>
+                {{ profileForm.department }}
+            </div>
+            <div class="profileButton">
+                <button type="submit">save</button>
+            </div>
+            <div class="profilePasswordChange">
+                <a href="/reserve/members/edit/change_password/">change Password</a>
+            </div>
+        </form>
+    </div>
+    <div class="profileName">{{ profile.first_name }}</div>
+    <div class="profileFamily">{{ profile.last_name }}</div>
+</div>
+<!-- end of content -->
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+    inputs = document.querySelectorAll('input')
+    inputs.forEach(e => {
+        if (e.value == '') {
+            e.setAttribute('placeholder', 'Fill in here')
+            e.style['border'] = '2px solid #ff0000'
+        }
+    });
+</script>
+
+<script src="{% static 'scripts/navbar.js' %}"></script>
+{% endblock %}

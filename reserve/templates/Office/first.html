@@ -1,0 +1,64 @@
+{% extends 'base_floors.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="shortcut icon" href="{% static 'styles/medias/tabLogo.png' %}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'styles/floors.css' %}">
+{% endblock %}
+{% block title %}
+<title>First floor | Reserve</title>
+{% endblock %}
+
+{% block floors_dd %}
+<li class="navMenuItem"><a href="/reserve/reserved/" class="navMenuItemLink">Reserve Status</a></li>
+<li><a href="/reserve/office/second/">Second floor</a></li>
+<li><a href="/reserve/office/third/">Third floor</a></li>
+{% endblock %}
+
+{% block settings_dd %}
+<li><a href="/reserve/settings/about/">About the APP</a></li>
+<li><a href="/reserve/settings/report/">Report the Bug</a></li>
+<li><a href="/reserve/members/profile/">Preferences</a></li>
+{% endblock %}
+
+{% block post %}
+<a href="/reserve/settings/post/" class="navMenuItemLink">Post Status {{ post }}</a>
+{% endblock %}
+
+{% block body %}
+<!-- Start of Content -->
+<div class="firstFloor">
+    <div class="ffPhoto">
+        <div class="ffPhotoContent">
+            <img src="{% static 'styles/medias/floors/Bonn_1.jpg' %}" alt="">
+        </div>
+    </div>
+    <div class="ffSelector">
+        <form action="" method="post" class="firstFloorSelector">
+            {% csrf_token %}
+            <div class="ffSelectorOffice">
+                <label for="ffRoomSelector">Select the office: </label>
+                {{ office }}
+            </div>
+            <div class="ffSelectorButton">
+                <button type="submit">Reserve!</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+    // delete the staff label 
+    staffLabel = document.querySelectorAll(".ffSelectorOffice label");
+    console.log((staffLabel[3].style["display"] = "none"));
+</script>
+
+<script src="{% static 'scripts/navbar.js' %}"></script>
+<script src="{% static 'scripts/floors.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base_floors.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="shortcut icon" href="{% static 'styles/medias/tabLogo.png' %}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'styles/report.css' %}">
+{% endblock %}
+{% block title %}
+<title>Report the bugs | Reserve</title>
+{% endblock %}
+
+{% block floors_dd %}
+<li class="navMenuItem"><a href="/reserve/reserved/" class="navMenuItemLink">Reserve Status</a></li>
+<li><a href="/reserve/office/first">First floor</a></li>
+<li><a href="/reserve/office/second">Second floor</a></li>
+<li><a href="/reserve/office/third">Third floor</a></li>
+{% endblock %}
+
+{% block settings_dd %}
+<li><a href="/reserve/settings/about/">About the APP</a></li>
+<li><a href="/reserve/members/profile">Preferences</a></li>
+{% endblock %}
+
+{% block post %}
+<a href="/reserve/settings/post/" class="navMenuItemLink">Post Status</a>
+{% endblock %}
+
+{% block body %}
+<!-- start of content -->
+<div class="reportBase">
+    <div class="reportContent">
+        <div class="reportData">
+            <div class="reportText">We thank you for helping us improve the program. You can report the problems
+                of the program to us from the menu below or send us your feedback about the program anonymously
+                or with your username.</div>
+            <form action="" method="POST" class="reportDataForm">
+                {% csrf_token %}
+                <div class="reportSender">
+                    {{ bugForm }}
+                </div>
+                <div class="reportButton">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- end of content -->
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'scripts/navbar.js' %}"></script>
+<script src="{% static 'scripts/report.js' %}"></script>
+{% endblock %}
